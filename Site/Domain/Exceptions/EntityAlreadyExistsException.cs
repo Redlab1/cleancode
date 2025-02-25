@@ -1,0 +1,3 @@
+﻿namespace Domain.Exceptions;
+
+public class EntityAlreadyExistsException(string message) : Exception(message);
