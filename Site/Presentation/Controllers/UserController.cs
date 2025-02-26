@@ -1,4 +1,6 @@
 ﻿using Application.Users.Commands.CreateUser;
+using Application.Users.Commands.DeleteUser;
+using Application.Users.Queries.GetUser;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,15 +18,17 @@ public class UserController(ISender sender) : ControllerBase
     }
 
     [HttpGet]
-    [Route("{id}")]
-    public async Task<IActionResult> GetById(Guid id)
+    [Route("{name}")]
+    public async Task<IActionResult> GetByName(string name)
     {
-        return Ok();
+        var user = await sender.Send(new GetUserQuery(name));
+        return Ok(user);
     }
 
     [HttpDelete]
-    public async Task<IActionResult> Delete(Guid id)
+    public async Task<IActionResult> Delete(DeleteUserRequest request)
     {
+        await sender.Send((DeleteUserCommand)request);
         return Ok();
     }
 }

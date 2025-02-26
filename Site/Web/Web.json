@@ -40,16 +40,26 @@
         "tags": [
           "User"
         ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "uuid"
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteUserRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteUserRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/DeleteUserRequest"
+              }
             }
-          }
-        ],
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -57,19 +67,18 @@
         }
       }
     },
-    "/api/User/{id}": {
+    "/api/User/{name}": {
       "get": {
         "tags": [
           "User"
         ],
         "parameters": [
           {
-            "name": "id",
+            "name": "name",
             "in": "path",
             "required": true,
             "schema": {
-              "type": "string",
-              "format": "uuid"
+              "type": "string"
             }
           }
         ],
@@ -86,7 +95,8 @@
       "CreateUserRequest": {
         "required": [
           "name",
-          "age"
+          "age",
+          "email"
         ],
         "type": "object",
         "properties": {
@@ -96,6 +106,21 @@
           "age": {
             "type": "integer",
             "format": "int32"
+          },
+          "email": {
+            "type": "string"
+          }
+        }
+      },
+      "DeleteUserRequest": {
+        "required": [
+          "id"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
           }
         }
       }

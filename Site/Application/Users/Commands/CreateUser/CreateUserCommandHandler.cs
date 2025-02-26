@@ -1,26 +1,32 @@
-﻿using Domain.Abstractions.Repositories;
+﻿using Application.Data;
+using Domain.Abstractions.Repositories;
+using Domain.DomainEvents;
 using Domain.Exceptions;
+using Domain.Entities;
 using MediatR;
-using Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Users.Commands.CreateUser;
 
-internal class CreateUserCommandHandler(
-    IUserRepository userRepository, 
-    MyDbContext dbContext) 
-    : IRequestHandler<CreateUserCommand, Domain.Entities.User?>
+internal class CreateUserCommandHandler(IUserRepository userRepository, 
+    IApplicationDbContext dbContext,
+    IPublisher publisher) 
+    : IRequestHandler<CreateUserCommand, User?>
 {
-    public async Task<Domain.Entities.User?> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+    public async Task<User?> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        var userExists = await userRepository.ExistsAsync(request.Name);
+        var userExists = await dbContext.Users.AnyAsync(x => x.Name == request.Name, cancellationToken);
         if (userExists)
-            throw new EntityAlreadyExistsException($"An user with the name {request.Name} already exists!");
+            throw new EntityAlreadyExistsException(request.Name);
 
-        var user = Domain.Entities.User.Create(request.Name, request.Age);
+        var user = User.Create(request.Name, request.Age, request.Email);
+        
         await userRepository.AddAsync(user);
 
         await dbContext.SaveChangesAsync(cancellationToken);
 
-        return await userRepository.GetByIdAsync(user.Id);
+        await publisher.Publish(new UserCreatedDomainEvent(user.Id), cancellationToken);
+
+        return await dbContext.Users.FindAsync(user.Id, cancellationToken);
     }
 }

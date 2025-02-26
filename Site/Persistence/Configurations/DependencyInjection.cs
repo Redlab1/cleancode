@@ -1,4 +1,5 @@
-﻿using Domain.Abstractions.Repositories;
+﻿using Application.Data;
+using Domain.Abstractions.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,12 +11,13 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddPersistence(this IServiceCollection services)
     {
-        services.AddScoped<IUserRepository, UserRepository>();
-
-        services.AddDbContext<MyDbContext>(options =>
+        services.AddDbContext<ApplicationDbContext>(options =>
         {
             options.UseSqlServer("Data Source=localhost;Initial Catalog=CleanCodeDB;Integrated Security=True;TrustServerCertificate=True;Connect Timeout=30");
         });
+
+        services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+        services.AddScoped<IUserRepository, UserRepository>();
 
         return services;
     }
@@ -23,7 +25,7 @@ public static class DependencyInjection
     public static void MigrateDatabase(this IApplicationBuilder app)
     {
         using var scope = app.ApplicationServices.CreateScope();
-        using var dbContext = scope.ServiceProvider.GetRequiredService<MyDbContext>();
+        using var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
         dbContext.Database.EnsureCreated();
         dbContext.Database.Migrate();
     }

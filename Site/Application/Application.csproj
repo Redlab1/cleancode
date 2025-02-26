@@ -7,19 +7,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Users\Commands\DeleteUser\" />
-    <Folder Include="Users\Events\UserCreated\" />
-    <Folder Include="Users\Queries\GetUser\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.2" />
+    <PackageReference Include="MimeKit" Version="4.10.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
-    <ProjectReference Include="..\Persistence\Persistence.csproj" />
   </ItemGroup>
 
 </Project>
