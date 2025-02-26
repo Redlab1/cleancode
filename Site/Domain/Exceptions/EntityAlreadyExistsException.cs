@@ -1,3 +1,3 @@
 ﻿namespace Domain.Exceptions;
 
-public class EntityAlreadyExistsException(string name) : Exception($"An user with the name {name} already exists!");
+public class EntityAlreadyExistsException(string email) : Exception($"An user with the email {email} already exists!");
