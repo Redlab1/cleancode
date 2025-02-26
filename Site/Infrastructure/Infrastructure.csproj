@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Email\Command\SendEmail\NewFolder\**" />
-    <EmbeddedResource Remove="Email\Command\SendEmail\NewFolder\**" />
-    <None Remove="Email\Command\SendEmail\NewFolder\**" />
+    <Compile Remove="Emails\Command\SendEmail\NewFolder\**" />
+    <EmbeddedResource Remove="Emails\Command\SendEmail\NewFolder\**" />
+    <None Remove="Emails\Command\SendEmail\NewFolder\**" />
   </ItemGroup>
 
   <ItemGroup>

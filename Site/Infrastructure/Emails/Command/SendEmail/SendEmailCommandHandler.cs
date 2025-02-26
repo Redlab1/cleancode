@@ -1,7 +1,7 @@
 using Application.Emails.Commands;
 using MediatR;
 
-namespace Infrastructure.Email.Command.SendEmail;
+namespace Infrastructure.Emails.Command.SendEmail;
 
 public class SendEmailCommandHandler : IRequestHandler<SendEmailCommand>
 {
