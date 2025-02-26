@@ -5,24 +5,14 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/api/User": {
+    "/api/users": {
       "post": {
         "tags": [
-          "User"
+          "Web"
         ],
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUserRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateUserRequest"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/CreateUserRequest"
               }
@@ -38,21 +28,11 @@
       },
       "delete": {
         "tags": [
-          "User"
+          "Web"
         ],
         "requestBody": {
           "content": {
             "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeleteUserRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DeleteUserRequest"
-              }
-            },
-            "application/*+json": {
               "schema": {
                 "$ref": "#/components/schemas/DeleteUserRequest"
               }
@@ -67,15 +47,15 @@
         }
       }
     },
-    "/api/User/{name}": {
+    "/api/users/{name}": {
       "get": {
         "tags": [
-          "User"
+          "Web"
         ],
         "parameters": [
           {
             "name": "name",
-            "in": "path",
+            "in": "query",
             "required": true,
             "schema": {
               "type": "string"
@@ -128,7 +108,7 @@
   },
   "tags": [
     {
-      "name": "User"
+      "name": "Web"
     }
   ]
 }

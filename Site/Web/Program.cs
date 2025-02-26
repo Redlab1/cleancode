@@ -1,6 +1,7 @@
 using Application.Configurations;
 using Infrastructure.Configurations;
 using Persistence.Configurations;
+using Presentation.Endpoints;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +18,6 @@ builder.Services.AddOpenApi();
 
 var app = builder.Build();
 
-app.MigrateDatabase();
-
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
@@ -26,12 +25,14 @@ if (app.Environment.IsDevelopment())
     {
         options.SwaggerEndpoint("/openapi/v1.json", "v1");
     });
+
+    app.MigrateDatabase();
 }
 
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapUserEndpoints();
 
 app.Run();

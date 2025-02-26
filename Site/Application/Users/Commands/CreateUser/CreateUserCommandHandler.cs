@@ -15,7 +15,7 @@ internal class CreateUserCommandHandler(IUserRepository userRepository,
 {
     public async Task<User?> Handle(CreateUserCommand request, CancellationToken cancellationToken)
     {
-        var userExists = await dbContext.Users.AnyAsync(x => x.Email.Equals(request.Email, StringComparison.InvariantCultureIgnoreCase), cancellationToken);
+        var userExists = await dbContext.Users.AnyAsync(x => x.Email == request.Email, cancellationToken);
         if (userExists)
             throw new EntityAlreadyExistsException(request.Email);
 
