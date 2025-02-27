@@ -18,7 +18,7 @@ internal class CreateUserCommandHandler(//CreateUserRepository createUserReposit
 
         var user = User.Create(request.Name, request.Age, request.Email);
 
-        //await createUserRepository.AddAsync(user);
+        //await createUserRepository.CreateAsync(user);
         await dbContext.Users.AddAsync(user, cancellationToken);
 
         await dbContext.SaveChangesAsync(cancellationToken);
