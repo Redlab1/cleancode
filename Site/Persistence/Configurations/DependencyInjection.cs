@@ -26,7 +26,7 @@ public static class DependencyInjection
     {
         using var scope = app.ApplicationServices.CreateScope();
         using var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-        dbContext.Database.EnsureCreated();
+        dbContext.Database.EnsureDeleted();
         dbContext.Database.Migrate();
     }
 }
