@@ -1,4 +1,4 @@
-﻿namespace Web3.Features.Users
+﻿namespace Web3.Features.Users.Validators
 {
     public static class UserException
     {

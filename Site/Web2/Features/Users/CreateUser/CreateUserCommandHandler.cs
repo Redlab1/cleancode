@@ -1,7 +1,5 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
-using Web2.Infrastructure;
-using Web2.Features.Users.Exceptions;
 
 namespace Web2.Features.Users.CreateUser;
 

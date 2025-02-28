@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using Web2.Features.Users.Exceptions;
 
 namespace Web2.Features.Users.CreateUser
 {
@@ -59,5 +58,6 @@ namespace Web2.Features.Users.CreateUser
             }
         }
         public sealed record UserCreatedDomainEvent(Guid UserId) : INotification;
+        public class UserAlreadyExistsException(string email) : Exception($"An user with the email {email} already exists!");
     }
 }

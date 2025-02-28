@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Web3.Features.Users;
+using Web3.Features.Users.Models;
 
 namespace Web3.Infrastructure;
 

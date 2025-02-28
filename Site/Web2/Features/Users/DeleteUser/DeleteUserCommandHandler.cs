@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Web2.Features.Users.Exceptions;
 
 namespace Web2.Features.Users.DeleteUser;
 

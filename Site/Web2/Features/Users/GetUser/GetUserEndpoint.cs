@@ -3,9 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Web2.Features.Users.GetUser;
 
-public static class UserEndpoints
+public static class GetUserEndpoint
 {
-    public static void MapEndpoints(this IEndpointRouteBuilder app)
+    public static void MapEndpoint(this IEndpointRouteBuilder app)
     {
         app.MapGet("api/users/{name}", async ([FromRoute] string name, [FromServices] ISender sender) =>
         {

@@ -1,6 +1,7 @@
-﻿using Web3.Infrastructure;
+﻿using Web3.Features.Users.Models;
+using Web3.Infrastructure;
 
-namespace Web3.Features.Users;
+namespace Web3.Features.Users.Repositories;
 
 public class UserRepository(ApplicationDbContext dbContext) : IUserRepository
 {

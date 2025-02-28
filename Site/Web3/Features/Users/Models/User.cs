@@ -1,6 +1,6 @@
 ﻿using System.Net.Mail;
 
-namespace Web3.Features.Users;
+namespace Web3.Features.Users.Models;
 
 public sealed class User
 {
